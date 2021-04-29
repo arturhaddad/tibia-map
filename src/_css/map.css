@@ -29,11 +29,16 @@ canvas,
 	line-height: 1.1;
 }
 
-.leaflet-control-container, .leaflet-control-container a {
+.leaflet-control-container,
+.leaflet-control-container a {
 	color: #000 !important;
 }
 
 .leaflet-control-container a:hover,
 .leaflet-control-container a:focus {
 	background-color: lightgray;
+}
+
+.leaflet-interactive {
+	cursor: grab;
 }
