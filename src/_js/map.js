@@ -294,7 +294,10 @@
 					true
 				);
 				const formatedCoords = coordX + "," + coordY + "," + coordZ;
-				window.top.postMessage({ coords: formatedCoords }, "*");
+				window.top.postMessage(
+					{ coords: formatedCoords, mapId: searchParams.get("id") },
+					"*"
+				);
 			}
 		});
 		map.on("fullscreenchange", function () {
