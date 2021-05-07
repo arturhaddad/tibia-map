@@ -300,12 +300,15 @@
 				);
 			}
 		});
-		map.on("fullscreenchange", function () {
-			setTimeout(function () {
-				const current = getUrlPosition();
-				map.panTo(map.unproject([current.x, current.y], 0));
-			}, 500);
-		});
+		map.on(
+			"mozfullscreenchange webkitfullscreenchange fullscreenchange",
+			function () {
+				setTimeout(function () {
+					const current = getUrlPosition();
+					map.panTo(map.unproject([current.x, current.y], 0));
+				}, 500);
+			}
+		);
 		this.crosshairs = L.crosshairs().addTo(map);
 		L.LevelButtons.btns = L.levelButtons({
 			layers_widget: layers_widget,
