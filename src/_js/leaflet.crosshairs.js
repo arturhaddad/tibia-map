@@ -1,7 +1,15 @@
 // Customized version of https://github.com/frankrowe/Leaflet.Crosshairs
-const searchParams = new URLSearchParams(window.location.search);
-const isSelectable = searchParams.get("selectable") !== "false";
 
+const isFeatureEnabled = function (feature) {
+	const mapElement = document.getElementsByClassName("needs-refetch")[0];
+	if (mapElement) {
+		const mapData = mapElement.dataset;
+		return mapData[feature] === "true";
+	}
+	return true;
+};
+
+// function initializeCrosshairs() {
 L.Crosshairs = L.LayerGroup.extend({
 	options: {
 		style: {
@@ -65,7 +73,7 @@ L.Crosshairs = L.LayerGroup.extend({
 		this._moveCrosshairs({
 			latlng: this._map.getCenter(),
 		});
-		if (isSelectable) {
+		if (isFeatureEnabled("selectable")) {
 			this._map.on("click", this._moveCrosshairs.bind(this));
 		}
 		this._map.on("move", this._moveCrosshairs.bind(this));
@@ -74,7 +82,7 @@ L.Crosshairs = L.LayerGroup.extend({
 		this.eachLayer(map.addLayer, map);
 	},
 	onRemove: function (map) {
-		if (isSelectable) {
+		if (isFeatureEnabled("selectable")) {
 			this._map.off("click", this._moveCrosshairs);
 		}
 		this._map.off("zoomend", this._moveCrosshairs);
